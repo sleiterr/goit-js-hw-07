@@ -25,28 +25,13 @@ const images = [
   }
 ];
 
-//створюємо елементи ul для галереї
-const ulElement = document.createElement("ul");
-ulElement.classList.add("gallery"); // Додаємо клас для стилізації flexbox
+// Отримуємо посилання на ul.gallery
+const gallery = document.querySelector('.gallery');
 
-//додаємо кожне зображення до галереї
-images.forEach(function (images) {
-  // створюємо елемент li для кожного зображення
-  const liElement = document.createElement("li");
+// Створюємо HTML розмітку для кожного зображення
+const imagesMarkup = images.map(({ url, alt }) => 
+  `<li class="gallery-item"><img src="${url}" alt="${alt}" class="gallery-image"></li>`
+).join('');
 
-  // створюємо тег img для зображення
-  const imgElement = document.createElement("img");
-  imgElement.src = images.url;
-  imgElement.alt = images.alt;
-
-  imgElement.classList.add("gallery-image");
-
-  //додаємо тег <img> до елемента <li>
-  liElement.appendChild(imgElement);
-
-  //Додаємо елемент <li> до списку <ul>
-  ulElement.appendChild(liElement);
-});
-
-//додаємо галерею до списку ul.gallery d DOM
-document.querySelector(".gallery").appendChild(ulElement);
+// Додаємо всю розмітку за одну операцію
+gallery.insertAdjacentHTML('beforeend', imagesMarkup);
